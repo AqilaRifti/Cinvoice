@@ -117,9 +117,10 @@ export function PortfolioTable({ invoices, isLoading }: PortfolioTableProps) {
                         icon={Briefcase}
                         title="No investments yet"
                         description="Browse the marketplace to start investing in invoices"
-                        action={
-                            <Button>Browse Marketplace</Button>
-                        }
+                        action={{
+                            label: 'Browse Marketplace',
+                            onClick: () => window.location.href = '/dashboard/investor?tab=marketplace'
+                        }}
                     />
                 </CardContent>
             </Card>

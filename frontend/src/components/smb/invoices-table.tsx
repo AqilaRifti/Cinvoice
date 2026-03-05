@@ -422,7 +422,7 @@ export function InvoicesTable({ invoices, isLoading, onRepay, onViewDetails }: I
                                             className="h-24 text-center"
                                         >
                                             <EmptyState
-                                                icon={<Search className="h-8 w-8" />}
+                                                icon={Search}
                                                 title="No results found"
                                                 description="Try adjusting your search or filters."
                                             />

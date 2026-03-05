@@ -23,7 +23,7 @@ import { toast } from 'sonner';
 
 function PurchaseInvoiceExample({ tokenId, smb }: { tokenId: number; smb: `0x${string}` }) {
     const { invoice } = useInvoiceDetails(tokenId);
-    const { purchasePrice, isLoading: priceLoading } = usePurchasePrice(tokenId, smb);
+    const { purchasePrice, isLoading: priceLoading } = usePurchasePrice(tokenId);
     const { mutateAsync: purchase, isPending } = usePurchaseInvoice();
 
     const handlePurchase = async () => {
@@ -32,7 +32,6 @@ function PurchaseInvoiceExample({ tokenId, smb }: { tokenId: number; smb: `0x${s
         try {
             await purchase({
                 tokenId,
-                smb,
                 purchasePrice,
             });
             toast.success('Invoice purchased successfully!');
@@ -198,7 +197,7 @@ function PlatformFeeExample() {
 
 function CompleteInvoiceCardExample({ tokenId, smb }: { tokenId: number; smb: `0x${string}` }) {
     const { invoice, isLoading: invoiceLoading } = useInvoiceDetails(tokenId);
-    const { purchasePrice, isLoading: priceLoading } = usePurchasePrice(tokenId, smb);
+    const { purchasePrice, isLoading: priceLoading } = usePurchasePrice(tokenId);
     const { investment } = useInvestment(tokenId);
     const { platformFee } = usePlatformFee();
 
@@ -209,7 +208,7 @@ function CompleteInvoiceCardExample({ tokenId, smb }: { tokenId: number; smb: `0
         if (!purchasePrice) return;
 
         try {
-            await purchase({ tokenId, smb, purchasePrice });
+            await purchase({ tokenId, purchasePrice });
             toast.success('Invoice purchased successfully!');
         } catch (error) {
             toast.error('Failed to purchase invoice');
