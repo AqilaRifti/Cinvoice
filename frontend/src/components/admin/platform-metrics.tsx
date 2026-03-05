@@ -79,11 +79,11 @@ export function PlatformMetrics() {
         functionName: 'platformFeePercent',
     });
 
-    const { stats, isLoading } = usePlatformStats();
+    const { totalInvoices: platformTotalInvoices, treasuryBalance: platformTreasury, isLoading } = usePlatformStats();
 
     const totalInvoices = nextTokenId ? Number(nextTokenId) : 0;
-    const totalVolume = stats?.totalVolume || 0n;
-    const activeInvestments = stats?.activeInvestments || 0;
+    const totalVolume = 0n; // TODO: Calculate from invoice data
+    const activeInvestments = 0; // TODO: Calculate from investment data
     const feePercent = platformFee ? Number(platformFee) / 100 : 0;
 
     // Mock trend data (in production, calculate from historical data)
