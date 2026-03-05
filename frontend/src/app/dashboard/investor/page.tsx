@@ -137,7 +137,7 @@ export default function InvestorDashboard() {
     }
 
     // Role-based access control
-    if (role && role !== 'investor' && role !== 'unknown') {
+    if (role && role !== 'investor' && role !== 'guest') {
         return (
             <div className="container mx-auto p-8">
                 <Card className="max-w-md mx-auto">
