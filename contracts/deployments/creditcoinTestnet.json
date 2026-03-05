@@ -1,0 +1,17 @@
+{
+  "network": "creditcoinTestnet",
+  "chainId": "102031",
+  "deployer": "0xec2C84d2AE3C7e385beAbcC77a96cfaE89301E4B",
+  "timestamp": "2026-02-06T11:49:08.802Z",
+  "contracts": {
+    "CreditScoreOracle": "0xBD100a74841854236E792bC88A5b969dc06E0be9",
+    "PlatformGovernance": "0x2f6d7D65880EBf10e6dB9825361cd899bc8B19fd",
+    "InvoiceNFT": "0xa0e680d9197e43d81400B2a8197a01d6A20ccB82",
+    "FinancingPool": "0x873aE215eD5850cD766491983544978c0D06073A"
+  },
+  "admins": {
+    "admin1": "0xec2C84d2AE3C7e385beAbcC77a96cfaE89301E4B",
+    "admin2": "0xbB4A4029CF56ce9F4dF6216D7b80d63be6F908d8",
+    "admin3": "0xec2C84d2AE3C7e385beAbcC77a96cfaE89301E4B"
+  }
+}
