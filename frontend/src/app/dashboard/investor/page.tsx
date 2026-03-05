@@ -270,10 +270,10 @@ export default function InvestorDashboard() {
                     {/* Portfolio Summary */}
                     <div className="grid lg:grid-cols-3 gap-6">
                         <div className="lg:col-span-2">
-                            <PortfolioSummary address={address} />
+                            <PortfolioSummary />
                         </div>
                         <div>
-                            <EarningsChart address={address} />
+                            <EarningsChart />
                         </div>
                     </div>
 
