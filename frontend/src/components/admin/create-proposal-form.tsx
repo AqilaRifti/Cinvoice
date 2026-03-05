@@ -127,125 +127,123 @@ export function CreateProposalForm() {
     return (
         <div className="space-y-6">
             {!showPreview ? (
-                <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <Form form={form} onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                    <FormField
+                        control={form.control}
+                        name="proposalType"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Proposal Type</FormLabel>
+                                <Select
+                                    onValueChange={(value) => field.onChange(Number(value))}
+                                    value={field.value.toString()}
+                                >
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select proposal type" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        {Object.entries(proposalTypeLabels).map(([value, label]) => (
+                                            <SelectItem key={value} value={value}>
+                                                {label}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <FormDescription>
+                                    {proposalTypeDescriptions[selectedType]}
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    {requiresTarget && (
                         <FormField
                             control={form.control}
-                            name="proposalType"
+                            name="target"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Proposal Type</FormLabel>
-                                    <Select
-                                        onValueChange={(value) => field.onChange(Number(value))}
-                                        value={field.value.toString()}
-                                    >
-                                        <FormControl>
-                                            <SelectTrigger>
-                                                <SelectValue placeholder="Select proposal type" />
-                                            </SelectTrigger>
-                                        </FormControl>
-                                        <SelectContent>
-                                            {Object.entries(proposalTypeLabels).map(([value, label]) => (
-                                                <SelectItem key={value} value={value}>
-                                                    {label}
-                                                </SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
+                                    <FormLabel>Target Address</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="0x..." {...field} />
+                                    </FormControl>
                                     <FormDescription>
-                                        {proposalTypeDescriptions[selectedType]}
+                                        The Ethereum address this proposal targets
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
+                    )}
 
-                        {requiresTarget && (
-                            <FormField
-                                control={form.control}
-                                name="target"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Target Address</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="0x..." {...field} />
-                                        </FormControl>
-                                        <FormDescription>
-                                            The Ethereum address this proposal targets
-                                        </FormDescription>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                        )}
-
-                        {requiresValue && (
-                            <FormField
-                                control={form.control}
-                                name="value"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>
-                                            {selectedType === ProposalType.FeeAdjustment
-                                                ? 'Fee Percentage (basis points)'
-                                                : 'Amount (CTC)'}
-                                        </FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                type="number"
-                                                step="0.01"
-                                                placeholder="0"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormDescription>
-                                            {selectedType === ProposalType.FeeAdjustment
-                                                ? 'Enter fee in basis points (e.g., 250 = 2.5%)'
-                                                : 'Amount to withdraw from treasury'}
-                                        </FormDescription>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                        )}
-
+                    {requiresValue && (
                         <FormField
                             control={form.control}
-                            name="description"
+                            name="value"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Description</FormLabel>
+                                    <FormLabel>
+                                        {selectedType === ProposalType.FeeAdjustment
+                                            ? 'Fee Percentage (basis points)'
+                                            : 'Amount (CTC)'}
+                                    </FormLabel>
                                     <FormControl>
-                                        <Textarea
-                                            placeholder="Provide a detailed description of this proposal..."
-                                            className="min-h-[120px]"
+                                        <Input
+                                            type="number"
+                                            step="0.01"
+                                            placeholder="0"
                                             {...field}
                                         />
                                     </FormControl>
                                     <FormDescription>
-                                        Explain the rationale and expected impact of this proposal
+                                        {selectedType === ProposalType.FeeAdjustment
+                                            ? 'Enter fee in basis points (e.g., 250 = 2.5%)'
+                                            : 'Amount to withdraw from treasury'}
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
+                    )}
 
-                        <div className="flex gap-3">
-                            <Button
-                                type="button"
-                                variant="outline"
-                                onClick={() => setShowPreview(true)}
-                                disabled={!form.formState.isValid}
-                            >
-                                <Eye className="h-4 w-4 mr-2" />
-                                Preview
-                            </Button>
-                            <Button type="submit" disabled={isPending}>
-                                {isPending && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
-                                Create Proposal
-                            </Button>
-                        </div>
-                    </form>
+                    <FormField
+                        control={form.control}
+                        name="description"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Description</FormLabel>
+                                <FormControl>
+                                    <Textarea
+                                        placeholder="Provide a detailed description of this proposal..."
+                                        className="min-h-[120px]"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormDescription>
+                                    Explain the rationale and expected impact of this proposal
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <div className="flex gap-3">
+                        <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => setShowPreview(true)}
+                            disabled={!form.formState.isValid}
+                        >
+                            <Eye className="h-4 w-4 mr-2" />
+                            Preview
+                        </Button>
+                        <Button type="submit" disabled={isPending}>
+                            {isPending && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
+                            Create Proposal
+                        </Button>
+                    </div>
                 </Form>
             ) : (
                 <Card>
@@ -297,7 +295,8 @@ export function CreateProposalForm() {
                         </div>
                     </CardContent>
                 </Card>
-            )}
-        </div>
+            )
+            }
+        </div >
     );
 }
