@@ -22,7 +22,7 @@ export default function InvestorDashboard() {
     const { address, isConnected } = useAccount();
     const { role } = useUserRole();
     const { invoices: marketplaceInvoices, isLoading: marketplaceLoading } = useMarketplaceInvoices();
-    const { investments, isLoading: investmentsLoading } = useUserInvestments(address);
+    const { investments, isLoading: investmentsLoading } = useUserInvestments();
 
     const [filters, setFilters] = useState<MarketplaceFiltersState>({
         creditScoreMin: 300,
